@@ -11,13 +11,13 @@ import java.util.Iterator;
  *
  * @author harsh
  */
-public class Ques1 extends javax.swing.JFrame {
+public class bubblesort extends javax.swing.JFrame {
         ArrayList <Double> rainfallAmt = new ArrayList();
         
     /**
      * Creates new form Ques1
      */
-    public Ques1() {
+    public bubblesort() {
         initComponents();
     }
         public static void bubbleSort(Double[] a,String[] months) {
@@ -232,21 +232,22 @@ a[j] = temp;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ques1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bubblesort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ques1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bubblesort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ques1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bubblesort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ques1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bubblesort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ques1().setVisible(true);
+                new bubblesort().setVisible(true);
             }
         });
     }

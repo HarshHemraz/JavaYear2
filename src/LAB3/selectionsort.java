@@ -3,34 +3,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package LAB3;
-import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import java.util.Iterator;
 
 /**
  *
  * @author harsh
  */
-public class Ques3 extends javax.swing.JFrame {
-    ArrayList <String> names = new ArrayList();
-    
-    
-public static void insertionSort(String[] a) {
-for (int i = 1; i < a.length; i++) {
-String temp = a[i];
+public class selectionsort extends javax.swing.JFrame {
+ArrayList <Double> prices = new ArrayList();
+String[] items = {"Milk","Chocolate","Eggs","Cold drink","Spaghetti","Noodles","Rice","Toothpaste","Butter","Yoghurt"};
 
-// slide elements down to make room for a[i]
-int j;
- for (j = i; j > 0 && a[j - 1].compareTo(temp) > 0; j--)
-a[j] = a[j - 1];
+public static void selectionSort(Double[] a, String[] b) {
+for (int i = 0; i < a.length; i++) {
+// find index of smallest element
+int min = i;
+for (int j = i + 1; j < a.length; j++)
+if (a[j] < a[min])
+min = j; // O(1)
+
+// swap smallest element with a[i]
+swap(a, i, min); // O(1)
+swapItems(b, i, min);
+}
+}
+private static void swap(Double[] a, int i, int j) {
+if (i == j)
+return;
+
+double temp = a[i];
+a[i] = a[j];
 a[j] = temp;
 }
+
+private static void swapItems(String[] a, int i, int j) {
+if (i == j)
+return;
+
+String temp = a[i];
+a[i] = a[j];
+a[j] = temp;
 }
 
+
     /**
-     * Creates new form Ques3
+     * Creates new form Ques2
      */
-    public Ques3() {
+    public selectionsort() {
         initComponents();
     }
 
@@ -46,8 +66,8 @@ a[j] = temp;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -56,13 +76,11 @@ a[j] = temp;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Insertion Sort App", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(0, 153, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selection App", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(0, 153, 255))); // NOI18N
 
-        jLabel1.setText("To sort the names of tennis members in ascending order:");
+        jLabel1.setText("To sort the items of a supermarket in ascending order");
 
-        jLabel2.setText("Click input button to insert the names of 10 member names:");
-
-        jLabel3.setText("Click the sort button to sort the names in ascending order:");
+        jLabel2.setText("Click the input button to insert the prices of the 10 items:");
 
         jButton1.setText("INPUT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +88,8 @@ a[j] = temp;
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Click the sort button to sort the prices in ascending order:");
 
         jButton2.setText("SORT");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,39 +113,39 @@ a[j] = temp;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                        .addGap(99, 99, 99)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)))
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
+                        .addGap(78, 78, 78)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,42 +171,37 @@ a[j] = temp;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        for (int x = 0; x < items.length; x++) {
+            String input = JOptionPane.showInputDialog("Enter price for " + items[x]);
+            double price = Double.parseDouble(input);
+            if( input != null) {
+                prices.add(price);
+            }
+            }
+            String output = "Items\tPrices\n----------------------------------------------\n";
+            Iterator <Double> mona = prices.iterator();
+            int index = 0;
+            while (mona.hasNext()) {
+                double currentPrice = mona.next();
+                output = output + items[index] +"\t" + currentPrice  + "\n";
+                index++;
+            }
+            jTextArea1.setText(output);
         
-        for (int x=0; x < 10; x++) {
-        String input = JOptionPane.showInputDialog("Enter names of Tennis members");
-        names.add(input);
-        }
-        
-        String outputN = "Name of tennis members\n----------------------------------------------\n";
-        
-        Iterator <String> mona = names.iterator();
-        
-        while (mona.hasNext()) {
-            outputN = outputN + mona.next() +"\n";
-        }
-        jTextArea1.setText(outputN);
-        
-        
-        
-        
-        
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String[] arrayName = names.toArray(new String[names.size()]);
+        Double[] priceArray = prices.toArray(new Double[prices.size()]);
         
-        String output = "Sorted Names\n";
+        String sortedOutput = "Sorted Items\tSorted Price\n----------------------------------------------\n" ;
+        selectionSort(priceArray,items);
         
-        insertionSort(arrayName);
-        
-        for (int x = 0; x < arrayName.length; x++) {
-            output = output + arrayName[x] + "\n----------------------------------------------\n";
+        for (int x = 0; x<priceArray.length; x++) {
+            sortedOutput = sortedOutput + items[x] + "\t" + priceArray[x] + "\n";
         }
-        
-        jTextArea2.setText(output);
-        
-        
+        jTextArea2.setText(sortedOutput);
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -208,20 +223,21 @@ a[j] = temp;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ques3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(selectionsort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ques3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(selectionsort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ques3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(selectionsort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ques3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(selectionsort.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ques3().setVisible(true);
+                new selectionsort().setVisible(true);
             }
         });
     }
