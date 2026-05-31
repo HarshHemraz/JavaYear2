@@ -242,6 +242,7 @@ public class loginPage extends javax.swing.JFrame {
         String filePath = "C:\\Users\\harsh\\OneDrive\\Documents\\NetBeansProjects\\BSE25AFT1_YEAR2\\src\\assignment\\loginUser.txt"; // your txt file
 
         boolean found = false;
+        boolean login = false;
 
         try {
             FileReader fr = new FileReader(filePath);
@@ -264,7 +265,7 @@ public class loginPage extends javax.swing.JFrame {
 
                 if (email.equals(s1) &&
                     password.equals(p1)) {
-
+                    login = true;
                     found = true;
                     break;
                 }
@@ -274,9 +275,8 @@ public class loginPage extends javax.swing.JFrame {
             fr.close();
 
             if (found) {
-                mainPage mP = new mainPage();
-                mP.setVisible(true);
-                
+                logginScreen logLoad = new logginScreen();
+                logLoad.setVisible(true);
                 loginPage.this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Error", JOptionPane.ERROR_MESSAGE);

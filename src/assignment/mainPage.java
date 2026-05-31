@@ -5,11 +5,22 @@
 package assignment;
 import javax.swing.JFrame;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+import java.net.URL;
+import javax.swing.ImageIcon;
 /**
  *
  * @author harsh
  */
+
 public class mainPage extends javax.swing.JFrame {
+      
+    
+    String[] horseName  ;
+      String[] jockeyName ;
+    
+    
+    
 
     /**
      * Creates new form mainPage
@@ -18,6 +29,90 @@ public class mainPage extends javax.swing.JFrame {
         initComponents();
         jPanel3.setBackground(new Color(0, 0, 0, 200));
     }
+ 
+  
+
+      
+        public static void bubbleSort(String[] horseName, String[] jockeyName) {
+    for (int i = 0; i < horseName.length; i++) {
+        for (int j = 1; j < horseName.length - i; j++) {
+            
+            String current = horseName[j-1];
+            String next = horseName[j];
+
+            // 1. Safety check for actual nulls
+            if (current == null || next == null) {
+                continue;
+            }
+
+            // 2. If the current cell is empty but the next one has a name, swap them
+            // This pushes all blank lines to the bottom of the table
+            if (current.isEmpty() && !next.isEmpty()) {
+                swap(horseName, j-1, j);
+                swapMonth(jockeyName, j-1, j);
+            } 
+            // 3. If both cells have text, compare them alphabetically
+            else if (!current.isEmpty() && !next.isEmpty()) {
+                if (current.compareTo(next) > 0) {
+                    swap(horseName, j-1, j);
+                    swapMonth(jockeyName, j-1, j);
+                }
+            }
+        }
+    }
+}
+
+
+private static void swap(String[] a, int i, int j) {
+if (i == j)
+return;
+
+String temp = a[i];
+a[i] = a[j];
+a[j] = temp;
+}
+private static void swapMonth(String[] a, int i, int j) {
+if (i == j)
+return;
+
+String temp = a[i];
+a[i] = a[j];
+a[j] = temp;
+}
+
+
+
+    public void readTableData(DefaultTableModel model) {
+        int rowCount = model.getRowCount();
+
+        // FIX 1: Initialize your arrays using the actual table row count
+        horseName = new String[rowCount];
+        jockeyName = new String[rowCount];
+
+        // Loop through every row
+        for (int i = 0; i < rowCount ; i++) {
+            // FIX 2: Safely extract data for this specific row OUTSIDE the column loop
+            if (model.getValueAt(i, 0) != null) {
+                horseName[i] = model.getValueAt(i, 0).toString();
+            } else {
+                horseName[i] = ""; // fallback for empty cell
+            }
+
+            
+            
+            if (model.getValueAt(i, 1) != null) {
+                jockeyName[i] = model.getValueAt(i, 1).toString(); // Fixed: changed 'j' to 'i'
+            } else {
+                jockeyName[i] = ""; // fallback for empty cell
+            }
+            
+  
+        }
+        
+        
+       
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +139,7 @@ public class mainPage extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +203,22 @@ public class mainPage extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -121,6 +233,22 @@ public class mainPage extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -131,9 +259,21 @@ public class mainPage extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 12)); // NOI18N
         jButton1.setText("Ascending");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 12)); // NOI18N
         jButton2.setText("Desending");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,36 +285,42 @@ public class mainPage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(81, 81, 81))
+                        .addGap(115, 115, 115)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 1000, 530));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 1010, 550));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/bgwall.gif"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 620));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,7 +339,7 @@ public class mainPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -210,6 +356,45 @@ public class mainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    URL imgUrl = getClass().getResource("arrowDown.gif");
+    ImageIcon newIcon = new ImageIcon(imgUrl);
+    jLabel8.setIcon(newIcon);
+            
+                                        
+   
+    DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+    
+    // 2. CRITICAL: This fills the horseName array. Do not remove this line!
+    readTableData(model1); 
+    
+    // 3. Run the sorting algorithm
+    bubbleSort(horseName, jockeyName);
+    
+    // 4. Get the model for the output table (jTable2)
+    DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+    model2.setRowCount(0); // Clear old results
+    
+    // 5. Check if the array was successfully created before looping
+    if (horseName != null) {
+        for (int i = 0; i < horseName.length; i++) {
+            if (!horseName[i].isEmpty() || !jockeyName[i].isEmpty()) {
+                model2.addRow(new Object[]{ horseName[i], jockeyName[i] });
+            }
+        }
+    }
+
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        URL imgUrl = getClass().getResource("arrowUp.gif");
+    ImageIcon newIcon = new ImageIcon(imgUrl);
+    jLabel8.setIcon(newIcon);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,6 +442,7 @@ public class mainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
